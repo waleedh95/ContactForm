@@ -1,0 +1,24 @@
+.contact-list-container {
+    margin-top: 2rem;
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.contact-list-container h2 {
+    color: #646cff;
+    margin-bottom: 1rem;
+}
+
+.no-contacts {
+    color: #888;
+    text-align: center;
+    font-style: italic;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

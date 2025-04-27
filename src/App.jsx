@@ -1,26 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
+import "./css/App.css";
+
 function App() {
     const [contacts, setContacts] = useState([]);
 
-    const addPerson = (person) => {
-        setContacts([...contacts, person]);
+    const addContact = (contact) => {
+        setContacts([...contacts, { ...contact, id: Date.now() }]);
     };
 
-    useEffect(() => {
-        console.log(contacts);
-        if (contacts.length > 0) {
-            console.log(`New contact added: ${contacts[contacts.length - 1].name}`);
-            console.log(`Total contacts now: ${contacts.length}`);
-        }
-    }, [contacts]);
+    const deleteContact = (id) => {
+        setContacts(contacts.filter(contact => contact.id !== id));
+    };
 
     return (
-        <div>
+        <div className="app">
             <h1>Contact Manager App</h1>
-            <ContactForm addPerson={addPerson} />
-            <ContactList contacts={contacts} />
+            <ContactForm addContact={addContact} />
+            <ContactList contacts={contacts} onDelete={deleteContact} />
         </div>
     );
 }

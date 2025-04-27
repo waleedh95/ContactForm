@@ -1,43 +1,40 @@
-import React from 'react';
-import { useState } from "react";
+import React, { useState } from "react";
+import "../css/ContactForm.css";
 
-function ContactForm(props) {
-    const [username, setUsername] = useState("");
+function ContactForm({ addContact }) {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
 
-    const addPersonSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-
-        let newPerson = {
-            name: username,  // Changed from username to name
-            email
-        };
-        props.addPerson(newPerson);
-
-        setUsername("");
+        if (!name || !email) return;
+        addContact({ name, email });
+        setName("");
         setEmail("");
-    }
+    };
 
     return (
-        <div>
-            <hr/>
-            <h1>Contact Form</h1>
-            <h2>Add a person</h2>
-            <form onSubmit={addPersonSubmit}>
+        <div className="contact-form-container">
+            <h2>Add New Contact</h2>
+            <form onSubmit={handleSubmit} className="contact-form">
                 <input
                     type="text"
-                    placeholder='Name'
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="form-input"
+                    required
                 />
                 <input
-                    type="text"
+                    type="email"
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="form-input"
+                    required
                 />
-                <button type="submit">
-                    Add Person
+                <button type="submit" className="submit-btn">
+                    Add Contact
                 </button>
             </form>
         </div>
